@@ -1,56 +1,56 @@
 #include "BTree.h"
 
 
-void CreatBTree(BTree &T, int n, int m) {//¹¹½¨Ò»¿Å½×ÊıÎªm,º¬ÓĞn¸ö¹Ø¼ü×ÖµÄBÊ÷(3<=m<=M,0<=n<=10000)
-										 //´´½¨BÊ÷
+void CreatBTree(BTree &T, int n, int m) {//æ„å»ºä¸€é¢—é˜¶æ•°ä¸ºm,å«æœ‰nä¸ªå…³é”®å­—çš„Bæ ‘(3<=m<=M,0<=n<=10000)
+										 //åˆ›å»ºBæ ‘
 	int i, j;
 	resultPtr p = NULL;
 	p = (result*)malloc(sizeof(result));
 	srand((unsigned)time(NULL));
 	if (n == 0)
-		printf("ÒÑ³É¹¦³õÊ¼»¯Ò»¿Ã¿ÕÊ÷¡£\n");
+		printf("å·²æˆåŠŸåˆå§‹åŒ–ä¸€æ£µç©ºæ ‘ã€‚\n");
 	else {
 		for (j = 0; j < n; j++) {
-			i = rand() % 1000;//Éú³ÉËæ»úÊıi
-			SearchBTree(T, i, *p);//²éÕÒi²åÈëÎ»ÖÃ
-			InsertBTree(T, i, p->pt, p->i, m);  //½øĞĞ²åÈë
+			i = rand() % 1000;//ç”Ÿæˆéšæœºæ•°i
+			SearchBTree(T, i, *p);//æŸ¥æ‰¾iæ’å…¥ä½ç½®
+			InsertBTree(T, i, p->pt, p->i, m);  //è¿›è¡Œæ’å…¥
 		}
-		printf("´´½¨BÊ÷³É¹¦£¡\n");
+		printf("åˆ›å»ºBæ ‘æˆåŠŸï¼\n");
 	}
 }
 
 void CountBTreeKey(BTree T, int &j) {
-	//¼ÆËã¹Ø¼ü×Ö¸öÊı  
+	//è®¡ç®—å…³é”®å­—ä¸ªæ•°  
 	int i = 1;
-	if (NULL != T) //µ±Îª¿Õ½áµãÊ±Í£Ö¹¸Ã½áµãµÄÊä³ö
+	if (NULL != T) //å½“ä¸ºç©ºç»“ç‚¹æ—¶åœæ­¢è¯¥ç»“ç‚¹çš„è¾“å‡º
 	{
 		for (; i <= T->keynum; i++)
 		{
-			CountBTreeKey(T->ptr[i - 1], j);    //µİ¹éÊä³ö¸÷¸öº¢×Ó½áµã
-			j++;                              //Í³¼Æ¹Ø¼ü×Ö¸öÊı
+			CountBTreeKey(T->ptr[i - 1], j);    //é€’å½’è¾“å‡ºå„ä¸ªå­©å­ç»“ç‚¹
+			j++;                              //ç»Ÿè®¡å…³é”®å­—ä¸ªæ•°
 		}
-		CountBTreeKey(T->ptr[i - 1], j);  //±éÀú×îºóÒ»¸ö»¹ÊÇ½áµã
+		CountBTreeKey(T->ptr[i - 1], j);  //éå†æœ€åä¸€ä¸ªè¿˜æ˜¯ç»“ç‚¹
 	}
 }
 
 
 void CountBTreeNode(BTree T, int &j) {
-	//¼ÆËãÓĞĞ§½áµã¸öÊı  
+	//è®¡ç®—æœ‰æ•ˆç»“ç‚¹ä¸ªæ•°  
 	int i = 1;
-	if (NULL != T) //µ±Îª¿Õ½áµãÊ±Í£Ö¹¸Ã½áµãµÄÊä³ö
+	if (NULL != T) //å½“ä¸ºç©ºç»“ç‚¹æ—¶åœæ­¢è¯¥ç»“ç‚¹çš„è¾“å‡º
 	{
 		for (; i <= T->keynum; i++)
 		{
-			CountBTreeNode(T->ptr[i - 1], j);    //µİ¹éÊä³ö¸÷¸öº¢×Ó½áµã
+			CountBTreeNode(T->ptr[i - 1], j);    //é€’å½’è¾“å‡ºå„ä¸ªå­©å­ç»“ç‚¹
 		}
-		CountBTreeNode(T->ptr[i - 1], j);  //±éÀú×îºóÒ»¸ö»¹ÊÇ½áµã
-		j++;                //Í³¼Æ½áµã¸öÊı
+		CountBTreeNode(T->ptr[i - 1], j);  //éå†æœ€åä¸€ä¸ªè¿˜æ˜¯ç»“ç‚¹
+		j++;                //ç»Ÿè®¡ç»“ç‚¹ä¸ªæ•°
 	}
 }
 
 
 void PrintBTree(BTree T) {
-	//ÖĞĞò±éÀúBÊ÷
+	//ä¸­åºéå†Bæ ‘
 	int i = 1;
 	if (NULL != T) {
 		for (; i <= T->keynum; i++) {
@@ -70,42 +70,42 @@ int Search(BTree p, int k) {
 }
 
 void  ShowBTree(BTree T, short  x)
-// µİ¹éÒÔ°¼Èë±íĞÎÊ½ÏÔÊ¾BÊ÷T,Ã¿²ãµÄËõ½øÁ¿Îªx£¬³õÊ¼Ëõ½øÁ¿Îª8  
+// é€’å½’ä»¥å‡¹å…¥è¡¨å½¢å¼æ˜¾ç¤ºBæ ‘T,æ¯å±‚çš„ç¼©è¿›é‡ä¸ºxï¼Œåˆå§‹ç¼©è¿›é‡ä¸º8  
 {
 	if (!T) return;
 	int     i;
 	printf("\n");
-	for (i = 0; i <= x; i++) putchar(' ');           // Ëõ½øx  
-	for (i = 1; i <= T->keynum; i++)                //Êä³öµ±Ç°½áµãµÄËùÓĞ¹Ø¼ü×Ö
+	for (i = 0; i <= x; i++) putchar(' ');           // ç¼©è¿›x  
+	for (i = 1; i <= T->keynum; i++)                //è¾“å‡ºå½“å‰ç»“ç‚¹çš„æ‰€æœ‰å…³é”®å­—
 	{
 		printf("%d,", T->key[i]);
 	}
-	for (i = 0; i <= T->keynum; i++)              // µİ¹éÏÔÊ¾×ÓÊ÷½áµã¹Ø¼ü×Ö  
+	for (i = 0; i <= T->keynum; i++)              // é€’å½’æ˜¾ç¤ºå­æ ‘ç»“ç‚¹å…³é”®å­—  
 		ShowBTree(T->ptr[i], x + 7);
 }
 
 
 void SearchBTree(BTree T, int k, result &r) {
-	//ÔÚm½×BÊ÷TÉÏ²éÕÒ¹Ø¼ü×Ök£¬·µ»Ø(pt,i,tag)
-	//Èô²éÕÒ³É¹¦£¬ÔòÌØÕ÷Öµtag=1,Ö¸ÕëptËùÖÂ½áµãÖĞµÚi¸ö¹Ø¼ü×ÖµÈÓÚk;·ñÔò
-	//ÌØÕ÷Öµtag=0£¬µÈÓÚkµÄ¹Ø¼ü×Ö¼ÇÂ¼Ó¦²åÈëÔÚÖ¸ÕëptËùÖ¸½áµãÖĞµÚi-1¸öºÍµÚi¸ö¹Ø¼ü×Ö¼ä
+	//åœ¨mé˜¶Bæ ‘Tä¸ŠæŸ¥æ‰¾å…³é”®å­—kï¼Œè¿”å›(pt,i,tag)
+	//è‹¥æŸ¥æ‰¾æˆåŠŸï¼Œåˆ™ç‰¹å¾å€¼tag=1,æŒ‡é’ˆptæ‰€è‡´ç»“ç‚¹ä¸­ç¬¬iä¸ªå…³é”®å­—ç­‰äºk;å¦åˆ™
+	//ç‰¹å¾å€¼tag=0ï¼Œç­‰äºkçš„å…³é”®å­—è®°å½•åº”æ’å…¥åœ¨æŒ‡é’ˆptæ‰€æŒ‡ç»“ç‚¹ä¸­ç¬¬i-1ä¸ªå’Œç¬¬iä¸ªå…³é”®å­—é—´
 	int i = 0, found = 0;
 	BTree p = T, q = NULL;
 	while (p != NULL && 0 == found) {
-		i = Search(p, k);//ÔÚp->key[1..keynum]ÖĞ²éÕÒp->key[i-1]<k<=p->p->key[i]
+		i = Search(p, k);//åœ¨p->key[1..keynum]ä¸­æŸ¥æ‰¾p->key[i-1]<k<=p->p->key[i]
 		if (i > 0 && p->key[i] == k)
-			found = 1;//ÕÒµ½´ı²é¹Ø¼ü×Ö
+			found = 1;//æ‰¾åˆ°å¾…æŸ¥å…³é”®å­—
 		else {
 			q = p;
 			p = p->ptr[i - 1];
 		}
 	}
-	if (1 == found) {//²éÕÒ³É¹¦
+	if (1 == found) {//æŸ¥æ‰¾æˆåŠŸ
 		r.pt = p;
 		r.i = i;
 		r.tag = 1;
 	}
-	else {//²éÕÒ²»³É¹¦£¬·µ»ØkeyµÄ²åÈëÎ»ÖÃi
+	else {//æŸ¥æ‰¾ä¸æˆåŠŸï¼Œè¿”å›keyçš„æ’å…¥ä½ç½®i
 		r.pt = q;
 		r.i = i;
 		r.tag = 0;
@@ -114,11 +114,11 @@ void SearchBTree(BTree T, int k, result &r) {
 
 
 void split(BTree &q, int s, BTree &ap) {
-	//½«q½áµã·ÖÁÑ³ÉÁ½¸ö½áµã£¬Ç°Ò»°ë±£Áô£¬ºóÒ»°ëÒÆÈëĞÂ½áµãap
+	//å°†qç»“ç‚¹åˆ†è£‚æˆä¸¤ä¸ªç»“ç‚¹ï¼Œå‰ä¸€åŠä¿ç•™ï¼Œåä¸€åŠç§»å…¥æ–°ç»“ç‚¹ap
 	int i, j, n = q->keynum;
-	ap = (BTNode*)malloc(sizeof(BTNode));//Éú³ÉĞÂ½áµãap
+	ap = (BTNode*)malloc(sizeof(BTNode));//ç”Ÿæˆæ–°ç»“ç‚¹ap
 	ap->ptr[0] = q->ptr[s];
-	for (i = s + 1, j = 1; i <= n; i++, j++) {//ºóÒ»°ëÒÆÈëap½áµã
+	for (i = s + 1, j = 1; i <= n; i++, j++) {//åä¸€åŠç§»å…¥apç»“ç‚¹
 		ap->key[j] = q->key[i];
 		ap->ptr[j] = q->ptr[i];
 	}
@@ -126,13 +126,13 @@ void split(BTree &q, int s, BTree &ap) {
 	ap->parent = q->parent;
 	for (i = 0; i <= n - s; i++) {
 		if (ap->ptr[i])
-			ap->ptr[i]->parent = ap;//½«apËùÓĞº¢×Ó½áµãÖ¸Ïòap
+			ap->ptr[i]->parent = ap;//å°†apæ‰€æœ‰å­©å­ç»“ç‚¹æŒ‡å‘ap
 	}
-	q->keynum = s - 1;//q½áµãµÄÇ°Ò»°ë±£Áô£¬ĞŞ¸Äkeynum
+	q->keynum = s - 1;//qç»“ç‚¹çš„å‰ä¸€åŠä¿ç•™ï¼Œä¿®æ”¹keynum
 }
 
 
-void newroot(BTree &T, BTree p, int x, BTree ap) {//Éú³ÉĞÂµÄ¸ù½áµã
+void newroot(BTree &T, BTree p, int x, BTree ap) {//ç”Ÿæˆæ–°çš„æ ¹ç»“ç‚¹
 	T = (BTNode*)malloc(sizeof(BTNode));
 	T->keynum = 1;
 	T->ptr[0] = p;
@@ -140,66 +140,66 @@ void newroot(BTree &T, BTree p, int x, BTree ap) {//Éú³ÉĞÂµÄ¸ù½áµã
 	T->key[1] = x;
 	if (p != NULL) p->parent = T;
 	if (ap != NULL) ap->parent = T;
-	T->parent = NULL;//ĞÂ¸ùµÄË«Ç×ÊÇ¿ÕÖ¸Õë
+	T->parent = NULL;//æ–°æ ¹çš„åŒäº²æ˜¯ç©ºæŒ‡é’ˆ
 }
 
 
-void Insert(BTree &q, int i, int x, BTree ap) {//xºÍap·Ö±ğ²åµ½q->key[i]ºÍq->ptr[i]
+void Insert(BTree &q, int i, int x, BTree ap) {//xå’Œapåˆ†åˆ«æ’åˆ°q->key[i]å’Œq->ptr[i]
 	int j, n = q->keynum;
 	for (j = n; j >= i; j--) {
-		q->key[j + 1] = q->key[j];//¹Ø¼ü×ÖÖ¸ÕëÏòºóÒÆÒ»Î»
-		q->ptr[j + 1] = q->ptr[j];//º¢×Ó½áµãÖ¸ÕëÏòºóÒÆÒ»Î»
+		q->key[j + 1] = q->key[j];//å…³é”®å­—æŒ‡é’ˆå‘åç§»ä¸€ä½
+		q->ptr[j + 1] = q->ptr[j];//å­©å­ç»“ç‚¹æŒ‡é’ˆå‘åç§»ä¸€ä½
 	}
-	q->key[i] = x;//¸³Öµ
+	q->key[i] = x;//èµ‹å€¼
 	q->ptr[i] = ap;
 	if (ap != NULL) ap->parent = q;
-	q->keynum++;//¹Ø¼ü×ÖÊı+1
+	q->keynum++;//å…³é”®å­—æ•°+1
 }
 
 
 void InsertBTree(BTree &T, int k, BTree q, int i, int m) {
-	//ÔÚBÊ÷TÉÏq½áµãµÄkey[i-1]ºÍkey[i]Ö®¼ä²åÈë¹Ø¼ü×Ök
-	//ÈôÒıÆğ½áµã¹ı´ó,ÔòÑØË«Ç×Ö¸Õë½øĞĞ±ØÒªµÄ½áµã·ÖÁÑµ÷Õû,Ê¹TÈÔÊÇm½×µÄBÊ÷
+	//åœ¨Bæ ‘Tä¸Šqç»“ç‚¹çš„key[i-1]å’Œkey[i]ä¹‹é—´æ’å…¥å…³é”®å­—k
+	//è‹¥å¼•èµ·ç»“ç‚¹è¿‡å¤§,åˆ™æ²¿åŒäº²æŒ‡é’ˆè¿›è¡Œå¿…è¦çš„ç»“ç‚¹åˆ†è£‚è°ƒæ•´,ä½¿Tä»æ˜¯mé˜¶çš„Bæ ‘
 	int x, s, finished = 0, neednewroot = 0;
 	BTree ap;
-	if (NULL == q)//qÎª¿Õ£¬ÔòĞÂ½¨¸ù½áµã
+	if (NULL == q)//qä¸ºç©ºï¼Œåˆ™æ–°å»ºæ ¹ç»“ç‚¹
 		newroot(T, NULL, k, NULL);
 	else {
 		x = k;
 		ap = NULL;
 		while (0 == neednewroot && 0 == finished) {
-			Insert(q, i, x, ap);//keyºÍap·Ö±ğ²åµ½q->key[i]ºÍq->ptr[i]
-			if (q->keynum < m) finished = 1;//²åÈëÍê³É
-			else {//·ÖÁÑq½áµã
+			Insert(q, i, x, ap);//keyå’Œapåˆ†åˆ«æ’åˆ°q->key[i]å’Œq->ptr[i]
+			if (q->keynum < m) finished = 1;//æ’å…¥å®Œæˆ
+			else {//åˆ†è£‚qç»“ç‚¹
 				s = (m + 1) / 2;
 				split(q, s, ap);
 				x = q->key[s];
 				if (q->parent != NULL) {
 					q = q->parent;
-					i = Search(q, x);//ÔÚË«Ç×½áµãÖĞ²éÕÒxµÄ²åÈëÎ»ÖÃ
+					i = Search(q, x);//åœ¨åŒäº²ç»“ç‚¹ä¸­æŸ¥æ‰¾xçš„æ’å…¥ä½ç½®
 				}
 				else neednewroot = 1;
 			}
 		}//while
-		if (1 == neednewroot)//TÊÇ¿ÕÊ÷»òÕß¸ù½áµãÒÑ·ÖÁÑÎªqºÍap½áµã
-			newroot(T, q, x, ap);//Éú³Éº¬ĞÅÏ¢(q,x,ap)µÄĞÂµÄ¸ù½áµãT
+		if (1 == neednewroot)//Tæ˜¯ç©ºæ ‘æˆ–è€…æ ¹ç»“ç‚¹å·²åˆ†è£‚ä¸ºqå’Œapç»“ç‚¹
+			newroot(T, q, x, ap);//ç”Ÿæˆå«ä¿¡æ¯(q,x,ap)çš„æ–°çš„æ ¹ç»“ç‚¹T
 	}
 }
 
 
-void Successor(BTree &p, int i) {//ÓÉºó¼Ì×îÏÂ²ã·ÇÖÕ¶Ë½áµãµÄ×îĞ¡¹Ø¼ü×Ö´úÌæ½áµãÖĞ¹Ø¼ü×Ökey[i]¡£
+void Successor(BTree &p, int i) {//ç”±åç»§æœ€ä¸‹å±‚éç»ˆç«¯ç»“ç‚¹çš„æœ€å°å…³é”®å­—ä»£æ›¿ç»“ç‚¹ä¸­å…³é”®å­—key[i]ã€‚
 	BTNode *temp;
 	temp = p->ptr[i];
-	for (; NULL != temp->ptr[0]; temp = temp->ptr[0]);//ÕÒ³ö¹Ø¼ü×ÖµÄºó¼Ì
+	for (; NULL != temp->ptr[0]; temp = temp->ptr[0]);//æ‰¾å‡ºå…³é”®å­—çš„åç»§
 	p->key[i] = temp->key[1];
 	p = temp;
 }
 
 
-void Remove(BTree &p, int i) {   //´Ó½áµãpÖĞÉ¾³ıkey[i]
+void Remove(BTree &p, int i) {   //ä»ç»“ç‚¹pä¸­åˆ é™¤key[i]
 	int j;
 	int n = p->keynum;
-	for (j = i; j < n; j++) {  //¹Ø¼ü×Ö×óÒÆ
+	for (j = i; j < n; j++) {  //å…³é”®å­—å·¦ç§»
 		p->key[j] = p->key[j + 1];
 		p->ptr[j] = p->ptr[j + 1];
 	}
@@ -207,14 +207,14 @@ void Remove(BTree &p, int i) {   //´Ó½áµãpÖĞÉ¾³ıkey[i]
 }
 
 
-void Restore(BTree &p, int i, int m, BTree &T) {//µ÷ÕûBÊ÷
+void Restore(BTree &p, int i, int m, BTree &T) {//è°ƒæ•´Bæ ‘
 	int j;
 	BTree ap = p->parent;
 	BTree lc, rc, pr;
 	int finished = 0, r = 0;
 	while (0 == finished) {
 		r = 0;
-		while (ap->ptr[r] != p)//È·¶¨pÔÚap×ÓÊ÷µÄÎ»ÖÃ
+		while (ap->ptr[r] != p)//ç¡®å®špåœ¨apå­æ ‘çš„ä½ç½®
 			r++;
 		if (r == 0) {
 			r++;
@@ -229,32 +229,32 @@ void Restore(BTree &p, int i, int m, BTree &T) {//µ÷ÕûBÊ÷
 			lc = ap->ptr[r - 1];
 			rc = ap->ptr[r + 1];
 		}
-		if (r > 0 && lc != NULL && (lc->keynum > (m - 1) / 2)) {//Ïò×óĞÖµÜ½è¹Ø¼ü×Ö
+		if (r > 0 && lc != NULL && (lc->keynum > (m - 1) / 2)) {//å‘å·¦å…„å¼Ÿå€Ÿå…³é”®å­—
 			p->keynum++;
-			for (j = p->keynum; j > 1; j--) {//½áµã¹Ø¼ü×ÖÓÒÒÆ
+			for (j = p->keynum; j > 1; j--) {//ç»“ç‚¹å…³é”®å­—å³ç§»
 				p->key[j] = p->key[j - 1];
 				p->ptr[j] = p->ptr[j - 1];
 			}
-			p->key[1] = ap->key[r];//¸¸Ç×²åÈëµ½½áµã
+			p->key[1] = ap->key[r];//çˆ¶äº²æ’å…¥åˆ°ç»“ç‚¹
 			p->ptr[1] = p->ptr[0];
 			p->ptr[0] = lc->ptr[lc->keynum];
-			if (NULL != p->ptr[0])//ĞŞ¸ÄpÖĞµÄ×ÓÅ®µÄ¸¸½áµãÎªp
+			if (NULL != p->ptr[0])//ä¿®æ”¹pä¸­çš„å­å¥³çš„çˆ¶ç»“ç‚¹ä¸ºp
 				p->ptr[0]->parent = p;
-			ap->key[r] = lc->key[lc->keynum];//×óĞÖµÜÉÏÒÆµ½¸¸Ç×Î»ÖÃ
+			ap->key[r] = lc->key[lc->keynum];//å·¦å…„å¼Ÿä¸Šç§»åˆ°çˆ¶äº²ä½ç½®
 			lc->keynum--;
 			finished = 1;
 			break;
 		}
 		else if (ap->keynum > r&&rc != NULL && (rc->keynum > (m - 1) / 2)) {
 			p->keynum++;
-			p->key[p->keynum] = ap->key[r];//¸¸Ç×²åÈëµ½½áµã
+			p->key[p->keynum] = ap->key[r];//çˆ¶äº²æ’å…¥åˆ°ç»“ç‚¹
 			p->ptr[p->keynum] = rc->ptr[0];
-			if (NULL != p->ptr[p->keynum]) {//ĞŞ¸ÄpÖĞµÄ×ÓÅ®µÄ¸¸½áµãÎªp
+			if (NULL != p->ptr[p->keynum]) {//ä¿®æ”¹pä¸­çš„å­å¥³çš„çˆ¶ç»“ç‚¹ä¸ºp
 				p->ptr[p->keynum]->parent = p;
 			}
-			ap->key[r] = rc->key[1];//ÓÒĞÖµÜÉÏÒÆµ½¸¸Ç×Î»ÖÃ
+			ap->key[r] = rc->key[1];//å³å…„å¼Ÿä¸Šç§»åˆ°çˆ¶äº²ä½ç½®
 			rc->ptr[0] = rc->ptr[1];
-			for (j = 1; j < rc->keynum; j++) {//ÓÒĞÖµÜ½áµã¹Ø¼ü×Ö×óÒÆ
+			for (j = 1; j < rc->keynum; j++) {//å³å…„å¼Ÿç»“ç‚¹å…³é”®å­—å·¦ç§»
 				rc->key[j] = rc->key[j + 1];
 				rc->ptr[j] = rc->ptr[j + 1];
 			}
@@ -263,62 +263,62 @@ void Restore(BTree &p, int i, int m, BTree &T) {//µ÷ÕûBÊ÷
 			break;
 		}
 		r = 0;
-		while (ap->ptr[r] != p) r++;//ÖØĞÂÈ·¶¨pÔÚap×ÓÊ÷µÄÎ»ÖÃ
-		if (r > 0 && (ap->ptr[r - 1]->keynum <= (m - 1) / 2)) {//Óë×óĞÖµÜºÏ²¢
+		while (ap->ptr[r] != p) r++;//é‡æ–°ç¡®å®špåœ¨apå­æ ‘çš„ä½ç½®
+		if (r > 0 && (ap->ptr[r - 1]->keynum <= (m - 1) / 2)) {//ä¸å·¦å…„å¼Ÿåˆå¹¶
 			lc = ap->ptr[r - 1];
 			p->keynum++;
-			for (j = p->keynum; j > 1; j--) {//½«p½áµã¹Ø¼ü×ÖºÍÖ¸ÕëÓÒÒÆ1Î»
+			for (j = p->keynum; j > 1; j--) {//å°†pç»“ç‚¹å…³é”®å­—å’ŒæŒ‡é’ˆå³ç§»1ä½
 				p->key[j] = p->key[j - 1];
 				p->ptr[j] = p->ptr[j - 1];
 			}
-			p->key[1] = ap->key[r];//¸¸½áµãµÄ¹Ø¼ü×ÖÓëpºÏ²¢
-			p->ptr[1] = p->ptr[0];//´Ó×óĞÖµÜÓÒÒÆÒ»¸öÖ¸Õë
+			p->key[1] = ap->key[r];//çˆ¶ç»“ç‚¹çš„å…³é”®å­—ä¸påˆå¹¶
+			p->ptr[1] = p->ptr[0];//ä»å·¦å…„å¼Ÿå³ç§»ä¸€ä¸ªæŒ‡é’ˆ
 			ap->ptr[r + 1] = lc;
-			for (j = 1; j <= lc->keynum + p->keynum; j++) {//½«½áµãpÖĞ¹Ø¼ü×ÖÒÆµ½p×óĞÖµÜÖĞ
+			for (j = 1; j <= lc->keynum + p->keynum; j++) {//å°†ç»“ç‚¹pä¸­å…³é”®å­—ç§»åˆ°på·¦å…„å¼Ÿä¸­
 				lc->key[lc->keynum + j] = p->key[j];
 				lc->ptr[lc->keynum + j] = p->ptr[j];
 			}
-			if (p->ptr[0]) {//ĞŞ¸ÄpÖĞµÄ×ÓÅ®µÄ¸¸½áµãÎªlc
+			if (p->ptr[0]) {//ä¿®æ”¹pä¸­çš„å­å¥³çš„çˆ¶ç»“ç‚¹ä¸ºlc
 				for (j = 1; j <= p->keynum; j++) {
 					p->ptr[p->keynum + j]->parent = lc;
 				}
 			}
-			lc->keynum = lc->keynum + p->keynum;//ºÏ²¢ºóµÄ¹Ø¼ü×Ö¸öÊı
+			lc->keynum = lc->keynum + p->keynum;//åˆå¹¶åçš„å…³é”®å­—ä¸ªæ•°
 			ap->keynum--;
 			pr = p;
-			free(pr);//ÊÍ·Åp½áµã¿Õ¼ä
+			free(pr);//é‡Šæ”¾pç»“ç‚¹ç©ºé—´
 			pr = NULL;
 			p = lc;
 		}
-		else {//ÓëÓÒĞÖµÜºÏ²¢
+		else {//ä¸å³å…„å¼Ÿåˆå¹¶
 			rc = ap->ptr[r + 1];
 			if (r == 0) r++;
 			p->keynum++;
-			p->key[p->keynum] = ap->key[r];//¸¸½áµãµÄ¹Ø¼ü×ÖÓëpºÏ²¢
-			p->ptr[p->keynum] = rc->ptr[0];//´ÓÓÒĞÖµÜ×óÒÆÒ»¸öÖ¸Õë
-			rc->keynum = p->keynum + rc->keynum;//ºÏ²¢ºó¹Ø¼ü×ÖµÄ¸öÊı
+			p->key[p->keynum] = ap->key[r];//çˆ¶ç»“ç‚¹çš„å…³é”®å­—ä¸påˆå¹¶
+			p->ptr[p->keynum] = rc->ptr[0];//ä»å³å…„å¼Ÿå·¦ç§»ä¸€ä¸ªæŒ‡é’ˆ
+			rc->keynum = p->keynum + rc->keynum;//åˆå¹¶åå…³é”®å­—çš„ä¸ªæ•°
 			ap->ptr[r - 1] = rc;
-			for (j = 1; j <= (rc->keynum - p->keynum); j++) {//½«pÓÒĞÖµÜµÄ¹Ø¼ü×ÖºÍÖ¸ÕëÓÒÒÆ
+			for (j = 1; j <= (rc->keynum - p->keynum); j++) {//å°†på³å…„å¼Ÿçš„å…³é”®å­—å’ŒæŒ‡é’ˆå³ç§»
 				rc->key[p->keynum + j] = rc->key[j];
 				rc->ptr[p->keynum + j] = rc->ptr[j];
 			}
-			for (j = 1; j <= p->keynum; j++) {//½«½áµãpÖĞ¹Ø¼ü×ÖºÍÖ¸ÕëÒÆµ½pÓÒĞÖµÜÖĞ
+			for (j = 1; j <= p->keynum; j++) {//å°†ç»“ç‚¹pä¸­å…³é”®å­—å’ŒæŒ‡é’ˆç§»åˆ°på³å…„å¼Ÿä¸­
 				rc->key[j] = p->key[j];
 				rc->ptr[j] = p->ptr[j];
 			}
 			rc->ptr[0] = p->ptr[0];
-			if (p->ptr[0]) {//ĞŞ¸ÄpÖĞµÄ×ÓÅ®µÄ¸¸½áµãÎªrc
+			if (p->ptr[0]) {//ä¿®æ”¹pä¸­çš„å­å¥³çš„çˆ¶ç»“ç‚¹ä¸ºrc
 				for (j = 1; j <= p->keynum; j++) {
 					p->ptr[p->keynum + j]->parent = rc;
 				}
 			}
-			for (j = r; j < ap->keynum; j++) {//½«¸¸½áµãÖĞ¹Ø¼ü×ÖºÍÖ¸Õë×óÒÆ
+			for (j = r; j < ap->keynum; j++) {//å°†çˆ¶ç»“ç‚¹ä¸­å…³é”®å­—å’ŒæŒ‡é’ˆå·¦ç§»
 				ap->key[j] = ap->key[j + 1];
 				ap->ptr[j] = ap->ptr[j + 1];
 			}
-			ap->keynum--;//¸¸½áµãµÄ¹Ø¼ü×Ö¸öÊı¼õ1
+			ap->keynum--;//çˆ¶ç»“ç‚¹çš„å…³é”®å­—ä¸ªæ•°å‡1
 			pr = p;
-			free(pr);//ÊÍ·Åp½áµã¿Õ¼ä
+			free(pr);//é‡Šæ”¾pç»“ç‚¹ç©ºé—´
 			pr = NULL;
 			p = rc;
 		}
@@ -326,9 +326,9 @@ void Restore(BTree &p, int i, int m, BTree &T) {//µ÷ÕûBÊ÷
 		if (p->parent->keynum >= (m - 1) / 2 || (NULL == ap&&p->parent->keynum > 0)) {
 			finished = 1;
 		}
-		else if (NULL == ap) {//Èôµ÷Õûºó³öÏÖ¿ÕµÄ¸ù½áµã£¬ÔòÉ¾³ı¸Ã¸ù½áµã£¬Ê÷¸ß¼õ1
+		else if (NULL == ap) {//è‹¥è°ƒæ•´åå‡ºç°ç©ºçš„æ ¹ç»“ç‚¹ï¼Œåˆ™åˆ é™¤è¯¥æ ¹ç»“ç‚¹ï¼Œæ ‘é«˜å‡1
 			pr = T;
-			T = p;//¸ù½áµãÏÂÒÆ
+			T = p;//æ ¹ç»“ç‚¹ä¸‹ç§»
 			free(pr);
 			pr = NULL;
 			finished = 1;
@@ -339,15 +339,15 @@ void Restore(BTree &p, int i, int m, BTree &T) {//µ÷ÕûBÊ÷
 
 
 void DeleteBTree(BTree p, int i, int m, BTree &T) {
-	//É¾³ıBÊ÷ÉÏp½áµãµÚi¸ö¹Ø¼ü×Ö
+	//åˆ é™¤Bæ ‘ä¸Špç»“ç‚¹ç¬¬iä¸ªå…³é”®å­—
 	if (p->ptr[i - 1] != NULL) {
-		Successor(p, i);         //Èô²»ÊÇ×îÏÂ²ã·ÇÖÕ¶Ë½áµã
-		DeleteBTree(p, 1, m, T);      //ÓÉºó¼Ì×îÏÂ²ã·ÇÖÕ¶Ë½áµãµÄ×îĞ¡¹Ø¼ü×Ö´úÌæËü
+		Successor(p, i);         //è‹¥ä¸æ˜¯æœ€ä¸‹å±‚éç»ˆç«¯ç»“ç‚¹
+		DeleteBTree(p, 1, m, T);      //ç”±åç»§æœ€ä¸‹å±‚éç»ˆç«¯ç»“ç‚¹çš„æœ€å°å…³é”®å­—ä»£æ›¿å®ƒ
 	}
-	else {//ÈôÊÇ×îÏÂ²ã·ÇÖÕ¶Ë½áµã
-		Remove(p, i);  //´Ó½áµãpÖĞÉ¾³ıkey[i]
-		if (p->keynum < (m - 1) / 2)  //É¾³ıºó¹Ø¼ü×Ö¸öÊıĞ¡ÓÚ(m-1)/2
-			Restore(p, i, m, T); //µ÷ÕûBÊ÷
+	else {//è‹¥æ˜¯æœ€ä¸‹å±‚éç»ˆç«¯ç»“ç‚¹
+		Remove(p, i);  //ä»ç»“ç‚¹pä¸­åˆ é™¤key[i]
+		if (p->keynum < (m - 1) / 2)  //åˆ é™¤åå…³é”®å­—ä¸ªæ•°å°äº(m-1)/2
+			Restore(p, i, m, T); //è°ƒæ•´Bæ ‘
 	}
 }
 
@@ -363,32 +363,31 @@ void DestroyBTree(BTree T) {
 }
 
 
-int menu() {//²Ëµ¥
+int menu() {//èœå•
 	int choice;
-	printf("\n\n\t\t\t|**********************************************|\n");
+	printf("\n\n\t\t\t|******************************************|\n");
 	printf("\t\t\t|**********************************************|\n");
-	printf("\t\t\t _____________ÇëÏÈ´´½¨BÊ÷ÔÙ½øĞĞ²Ù×÷£¡__________\n");
-	printf("\t\t\t|                  BÊ÷²âÊÔ½çÃæ                 |\n");
+	printf("\t\t\t _____________è¯·å…ˆåˆ›å»ºBæ ‘å†è¿›è¡Œæ“ä½œï¼__________\n");
+	printf("\t\t\t|                  Bæ ‘æµ‹è¯•ç•Œé¢                  |\n");
 	printf("\t\t\t|                                              |\n");
-	printf("\t\t\t|   1.´´½¨BÊ÷            2.BÊ÷½áµãµÄ²éÕÒ       |\n");
+	printf("\t\t\t|   1.åˆ›å»ºBæ ‘            2.Bæ ‘ç»“ç‚¹çš„æŸ¥æ‰¾         |\n");
 	printf("\t\t\t|                                              |\n");
-	printf("\t\t\t|   3.BÊ÷½áµãµÄ²åÈë      4.BÊ÷½áµãµÄÉ¾³ı       |\n");
+	printf("\t\t\t|   3.Bæ ‘ç»“ç‚¹çš„æ’å…¥      4.Bæ ‘ç»“ç‚¹çš„åˆ é™¤         |\n");
 	printf("\t\t\t|                                              |\n");
-	printf("\t\t\t|   5.BÊ÷µÄ±éÀú          6.BÊ÷µÄÊä³ö           |\n");
+	printf("\t\t\t|   5.Bæ ‘çš„éå†          6.Bæ ‘çš„è¾“å‡º             |\n");
 	printf("\t\t\t|                                              |\n");
-	printf("\t\t\t|   7.BÊ÷µÄ½áµãÊıÄ¿      8.BÊ÷µÄ¹Ø¼ü×ÖÊı       |\n");
+	printf("\t\t\t|   7.Bæ ‘çš„ç»“ç‚¹æ•°ç›®      8.Bæ ‘çš„å…³é”®å­—æ•°         |\n");
 	printf("\t\t\t|                                              |\n");
-	printf("\t\t\t|   9.BÊ÷µÄ´İ»Ù		   0.ÍË³ö				 |\n");
+	printf("\t\t\t|   9.Bæ ‘çš„æ‘§æ¯          0.é€€å‡º	                |\n");
 	printf("\t\t\t|______________________________________________|\n");
 	printf("\t\t\t|**********************************************|\n");
 	printf("\t\t\t|**********************************************|\n");
-	printf("\t\t\t|              16ÍøÂç¹¤³Ì(4)°à                 |\n");
-	printf("\t\t\t|                 3116005057                   |\n");
-	printf("\t\t\t|                    ÁÖ¿¬                      |\n");
-	printf("\t\t\t|********************S**************************|\n");
+	printf("\t\t\t|                16ç½‘ç»œå·¥ç¨‹(4)ç­                |\n");
+	printf("\t\t\t|                    æ—æ¥·                      |\n");
+	printf("\t\t\t|********************S************************ |\n");
 	do {
-		printf("\t\t\tÇëÑ¡Ôñ¹¦ÄÜ£¨ÊäÈë1-9ÈÎÒâÒ»¸öÊı×Ö£©:");
+		printf("\t\t\tè¯·é€‰æ‹©åŠŸèƒ½ï¼ˆè¾“å…¥1-9ä»»æ„ä¸€ä¸ªæ•°å­—ï¼‰:");
 		scanf_s("%d", &choice);
-	} while (choice<0 || choice>9);//±ÜÃâ·Ç·¨ÊäÈë
+	} while (choice<0 || choice>9);//é¿å…éæ³•è¾“å…¥
 	return choice;
 }
